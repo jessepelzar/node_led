@@ -1,0 +1,33 @@
+{
+  "name": "LED_Sockets",
+  "version": "1.0.0",
+  "author": "Jesse Pelzar",
+  "description": "controll an led",
+  "engines": {
+    "node": "4.0.0"
+  },
+  "main": "main.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node test.js"
+  },
+  "dependencies": {
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "request": "^2.83.0",
+    "tape": "^4.8.0"
+  },
+  "repository": {
+    "type": "",
+    "url": ""
+  },
+  "keywords": [
+    "screen",
+    "cracked",
+    "phonofixbu"
+  ],
+  "license": "MIT"
+}
