@@ -1,33 +1,29 @@
 {
-  "name": "LED_Sockets",
+  "name": "node_led",
   "version": "1.0.0",
-  "author": "Jesse Pelzar",
-  "description": "controll an led",
-  "engines": {
-    "node": "4.0.0"
-  },
+  "description": "controlling an led through a webpage using raspi and node.js",
   "main": "main.js",
-  "scripts": {
-    "start": "node index.js",
-    "test": "node test.js"
-  },
   "dependencies": {
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "devDependencies": {
+    "express": "^4.16.2",
     "request": "^2.83.0",
+    "serialport": "^6.0.4",
+    "socket.io": "^2.0.4",
+    "socket.io-client": "^2.0.4",
     "tape": "^4.8.0"
   },
-  "repository": {
-    "type": "",
-    "url": ""
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "screen",
-    "cracked",
-    "phonofixbu"
-  ],
-  "license": "MIT"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jessepelzar/node_led.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jessepelzar/node_led/issues"
+  },
+  "homepage": "https://github.com/jessepelzar/node_led#readme"
 }

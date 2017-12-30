@@ -1,37 +1,27 @@
-var express = require('express');  //web server
+var express = require('express'); 		 //web server
 app = express();
 server = require('http').createServer(app);
-io = require('socket.io').listen(server);	//web socket server
+io = require('socket.io').listen(server);	 //web socket server
 
-/*
-const express = require('express')
-const path = require('path')
-const PORT = process.env.PORT || 5000
+var SerialPort = require('serialport');
+var port = new SerialPort('/dev/ttyACM0', {
+  baudRate: 115200
+});
 
-express()
-  .use(express.static(path.join(__dirname, 'public')))
-  .set('public', path.join(__dirname, 'public'))
-  .set('view engine', 'html')
-  .get('/', (req, res) => res.render('public/led_webserver'))
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`))
-*/
-server.listen(8080); //start the webserver on port 8080
-app.use(express.static('public')); //tell the server that ./public/ contains the static webpages
+server.listen(8080); 				//start the webserver on port 8080
+app.use(express.static('public')); 		//tell the server that ./public/ contains the static webpages
 
-var SerialPort = require("serialport").SerialPort
-var serialPort = new SerialPort("/dev/ttyACM0", { baudrate: 115200 });
-
-var brightness = 0; //static variable to hold the current brightness
+var brightness = 0; 				//static variable to hold the current brightness
 
 io.sockets.on('connection', function (socket) { //gets called whenever a client connects
-    //socket.emit('led', {value: brightness}); //send the new client the current brightness
+    //socket.emit('led', {value: brightness});  //send the new client the current brightness
 
-    socket.on('led', function (data) { //makes the socket react to 'led' packets by calling this function
-        brightness = data.value;  //updates brightness from the data object
+    socket.on('led', function (data) { 		//makes the socket react to 'led' packets by calling this function
+        brightness = data.value; 	 	//updates brightness from the data object
         
-	var buf = new Buffer(1); //creates a new 1-byte buffer
-        buf.writeUInt8(brightness, 0); //writes the pwm value to the buffer
-        serialPort.write(buf); //transmits the buffer to the arduino
+	var buf = new Buffer(1); 		//creates a new 1-byte buffer
+        buf.writeUInt8(brightness, 0); 		//writes the pwm value to the buffer
+        port.write(buf); 			//transmits the buffer to the arduino
 
         io.sockets.emit('led', {value: brightness}); //sends the updated brightness to all connected clients
     });
@@ -41,3 +31,4 @@ io.sockets.on('connection', function (socket) { //gets called whenever a client 
 });
 
 console.log("running");
+
